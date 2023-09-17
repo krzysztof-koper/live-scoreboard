@@ -3,6 +3,15 @@ package org.sportradar.soccer.worldcup;
 import java.util.List;
 import java.util.Objects;
 
+/**
+ * LiveScoreboard Summary view class
+ *
+ * <p>It contains list of the current scores on the scoreboard
+ *
+ * @version 1.0
+ * @since 1.0
+ * @author krzysztofkoper
+ */
 public class Summary {
   private final List<Score> scores;
 
