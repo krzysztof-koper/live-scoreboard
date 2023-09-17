@@ -15,6 +15,7 @@ class Match {
   }
 
   Match(String homeTeam, String awayTeam, Instant startingTime) {
+    checkTeamNames(homeTeam, awayTeam);
     this.homeTeam = homeTeam;
     this.awayTeam = awayTeam;
     this.startingTime = startingTime;
@@ -45,7 +46,36 @@ class Match {
   }
 
   Match updateScore(final int homeScore, final int awayScore) {
+    checkScore(homeScore);
+    checkScore(awayScore);
+    this.homeScore = homeScore;
+    this.awayScore = awayScore;
     return this;
+  }
+
+  private static void checkTeamNames(String homeTeam, String awayTeam) {
+    checkTeamName(homeTeam);
+    checkTeamName(awayTeam);
+    if (homeTeam.equals(awayTeam)) {
+      throw new IllegalArgumentException(
+              String.format(
+                      "Team names cannot be the same, provided home team: %s , away team: %s",
+                      homeTeam, awayTeam));
+    }
+  }
+
+  private static void checkTeamName(String name) {
+    if (name.isBlank()) {
+      throw new IllegalArgumentException(
+              String.format("Team name cannot be blank, provided: %s", name));
+    }
+  }
+
+  private static void checkScore(int score) {
+    if (score < 0) {
+      throw new IllegalArgumentException(
+              String.format("Team score cannot be negative number, provided: %d", score));
+    }
   }
 
   @Override
